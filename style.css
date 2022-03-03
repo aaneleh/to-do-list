@@ -67,7 +67,7 @@ body {
 html {
     height: 115vh; /* <--------- */
     width: 100vw;
-    overflow: hidden; 
+    overflow: hidden;
 }
 footer, header{
     display: flex;
@@ -266,18 +266,22 @@ footer a, header a{
 
 
 
-
 @media screen and (min-width: 900px) {
     html {
         background: var(--mit-tone);
+
+        position: absolute;
+        top: 0;
+
         display: flex;
         justify-content: center;
         align-items: center;
-        /* overflow: hidden; */
+        overflow: auto;
     }
     body {
         width: 150vh;
-        margin: auto 1em;
+        height: auto;
+        /* margin: auto 1em; */
         background: var(--background);
         border-radius: 0.5em;
         box-shadow: 0 0 0.75em 0.075em var(--font);

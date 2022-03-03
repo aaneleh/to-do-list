@@ -1,5 +1,5 @@
 <?php
-	//require_once('conexao.php');
+	require_once('db.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,20 +15,16 @@
     <title>To-do-list</title>
 </head>
 <body>
-    
-    <main>
-        <?php
-            if(isset($_GET['pag']) and !empty($_GET['pag']) ){ 
 
-                $pg = $_GET['pag'];
+    <?php
+        if(isset($_GET['pag']) and !empty($_GET['pag']) ){ 
+            $pg = $_GET['pag'];
+            require_once($pg.'.php');  
 
-                require_once($pg.'.php');  
-
-            } else {
-                require_once('entrance.php');
-            }
-        ?>
-    </main>
+        } else {
+            require_once('entrance.php');
+        }
+    ?>
 
     <section id="config" class="">
         <header>
@@ -88,7 +84,7 @@
     </section>
 
     <footer>
-        <div class="config-container">
+        <div>
             <p class="clickable" onclick="toggleConfig()">
                 <i class="bi bi-gear-fill clickable"></i>
             </p>

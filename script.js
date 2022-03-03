@@ -64,3 +64,8 @@ function toggleConfPass(){
         console.log('error');
     }
 }
+
+/*** HOME ***/
+
+//no caso de adicionar um novo 
+
