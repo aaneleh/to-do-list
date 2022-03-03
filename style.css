@@ -32,12 +32,16 @@ a {
     padding: 0.5em 1em;
     border-radius: 1em;
     transition: all 0.3s;
+
+
 }
 .button:hover {
     background: var(--font);
     color: var(--background);
     border-radius: 1.25em;
     padding: 1em 1.5em;
+    
+
 }
 .black.button{
     background: var(--font);
