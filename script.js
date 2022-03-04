@@ -66,6 +66,3 @@ function toggleConfPass(){
 }
 
 /*** HOME ***/
-
-//no caso de adicionar um novo 
-

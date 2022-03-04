@@ -32,9 +32,14 @@
 
         <?php 
         //se tem um status, e não ta vazio e é "passwordmatch", mostra o aviso
-            if (isset($_GET['status']) and !empty($_GET['status'] and $_GET['status'] == 'passwordmatch')) {
+        if (isset($_GET['status']) and !empty($_GET['status'])) {
+            $status = $_GET['status'];
+            if($status == 'passwordmatch'){
                 echo '<p style="color:red"><br>&nbsp&nbspAs senhas não são iguais!</p>';
+            } else if($status == 'loginerror') {
+                echo '<p style="color:red"><br>&nbsp&nbspErro ao fazer login!</p>';
             }
+        }
         ?>
     </div>
 

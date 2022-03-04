@@ -106,7 +106,7 @@ footer a, header a{
 }
 
 /* LOGIN AND REGISTER */
-.login {
+.login, .edit {
     height: 90vh;
     display: flex;
     flex-direction: column;

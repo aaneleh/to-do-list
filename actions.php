@@ -13,17 +13,36 @@
         case 'register':
             if($data['password'] == $data['password-confirm']){
                 $user = $data['user'];
-                $senha = password_hash($data['password'],PASSWORD_DEFAULT);
+                $password = $data['password'];
+                $hash = password_hash($password,PASSWORD_DEFAULT);
                 
-                $query = 'INSERT INTO users (email, password) VALUES ("'.$user.'","'.$senha.'")' ;
+                $query = 'INSERT INTO users (email, password) VALUES ("'.$user.'","'.$hash.'")' ;
                 $res = mysqli_query($link, $query) or die(mysqli_error($link));
 
-                session_start();
-                $_SESSION['user_id'] = $row['user_id'];
-                $_SESSION['email'] = $row['email'];
-                $nextPage = "home&user=".$user; 
+                /*pagina default:*/ $nextPage = "register&status=loginerror";
+
+                //INICIA SESSÃO COM A FUNÇÃO DE LOGIN
+                $query = 'SELECT * FROM users WHERE email ="'.$user.'"';
+                $res = mysqli_query($link, $query) or die(mysqli_error($link));
+                if(mysqli_num_rows($res) > 0){
+                    while($row = mysqli_fetch_assoc($res)){
+                        $db_password = $row['password'];
+                        if(password_verify($password, $db_password)){
+                            echo '<br>senha top';
+                            session_start();
+                            $_SESSION['user_id'] = $row['user_id'];
+                            $_SESSION['email'] = $row['email'];
+                            $nextPage = "home";
+                        } else {
+                            echo '<br>senha não top';
+                        }
+                    }
+                }
+
+
+
+            //senhas não combinam, volta pro register com um aviso
             } else {
-                //senhas não combinam, volta pro register com um aviso
                 $nextPage = "register&status=passwordmatch";
             }
             break;
@@ -74,7 +93,7 @@
                     $query = 'INSERT INTO tasks (user, description) VALUES ("'.$user.'","'.$task.'")';
                     $res = mysqli_query($link, $query) or die(mysqli_error($link));
                     
-                //se não tem ninguem logado faz y
+//!TO DO!: se não tem ninguem logado salva as coisa no local storage
                 } else {
                     echo 'bad user';
                 }
@@ -84,16 +103,34 @@
         
         //delete
         case 'delete':
+//checa se o id_user da session é igual o id_user da row que tem o task_id
             $task_id = $data['task_id'];
             $query = 'DELETE FROM tasks WHERE task_id ="'.$task_id.'"';
             $res = mysqli_query($link, $query) or die(mysqli_error($link));
             $nextPage = "home";
             
             break;
+
         //edit
+        case 'edit':
+            //caso algo de errado, essa pagina fica como 'default' já
+            
+            $task_id = $data['task_id'];
+            $new_description = $data['description'];
+
+            $nextPage = 'edit&id_task='.$task_id.'status=error';
+
+            echo '<br>editando';
+            echo '<br>id : '. $task_id;
+            echo '<br>desc : '.$new_description;
+
+            $query = 'UPDATE tasks SET description = "'.$new_description.'" WHERE task_id = "'.$task_id.'"';
+            $res = mysqli_query($link, $query) or die(mysqli_error($link));
+            $nextPage = 'edit&id_task='.$task_id.'&status=ok';
+            break;
 
         default:
-            echo "ação errada";
+            echo "ueepaaa ação errada";
             break;
     }
 

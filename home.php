@@ -1,5 +1,3 @@
-
-
 <header>
     <h3 class="title">
         <a href="index.php?pag=entrance">
@@ -42,17 +40,22 @@
                                 <input type="checkbox" class="clickable">
                                 <p class="todo-text">'.$description.'</p>
                             </div>
+                            
+
+                            
                             <div>
-                                <i class="clickable bi bi-pencil-fill"></i>
-
-
+                                <!-- EDIT PENCIL -->
+                                <a href="index.php?pag=edit&id_task='.$task_id.'"> 
+                                    <i class="clickable bi bi-pencil-fill"></i>
+                                </a>
+                        
+                                <!-- DELETE X -->
                                 <form method="POST" action="actions.php">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="task_id" value='.$task_id.'>
 
                                     <input type="submit" name="submit" value="X" style="border: none; background: transparent; font-size: 20px; font-weight: 700; width: auto" class="clickable">
                                 </form>
-                                
                             </div>
                         </div>
                     ';
