@@ -15,12 +15,39 @@
             //se não tem user
             } else {
                 echo '<a class="white button" href="index.php?pag=login"> Login </a>';
+
+                //ADICIONA NOVA TASK AO LOCAL STORAGE
+                if( isset($_GET['task']) and !empty($_GET['task'])){
+                    $task = $_GET['task'];
+                    echo '<script>
+                            var localList = localStorage.getItem("tasks");
+                            var list = JSON.parse(localList);
+                            if(list == null){
+                                var newList = ["'.$task.'"];
+                                localStorage.setItem("tasks", JSON.stringify(newList));
+                            } else {
+                                list.push("'.$task.'");
+                                localStorage.setItem("tasks", JSON.stringify(list));
+                            }
+                        </script>';
+                }
+
+                //DELETA TASK DO LOCAL STORAGE
+                if( isset($_GET['delete'])){
+                    $delete = $_GET['delete']; //passa o id a ser deletado no action.php
+                    echo '<script>
+                            var localList = localStorage.getItem("tasks");
+                            var list = JSON.parse(localList);
+                            list.splice('.$delete.', 1);
+                            localStorage.setItem("tasks", JSON.stringify(list));
+                        </script>';
+                }
             }
         ?>
     </h3>
 </header>
 
-<main class="home">
+<main class="home" id="home">
 
     <?php
         //MOSTRA AS TAREFAS DO BANCO DE DADOS
@@ -34,15 +61,12 @@
                     $description = $task['description'];
                     $task_id = $task['task_id'];
 
-                    echo '
-                        <div class="todo">
+                    echo '<div class="todo">
                             <div>
                                 <input type="checkbox" class="clickable">
                                 <p class="todo-text">'.$description.'</p>
                             </div>
-                            
 
-                            
                             <div>
                                 <!-- EDIT PENCIL -->
                                 <a href="index.php?pag=edit&id_task='.$task_id.'"> 
@@ -57,8 +81,7 @@
                                     <input type="submit" name="submit" value="X" style="border: none; background: transparent; font-size: 20px; font-weight: 700; width: auto" class="clickable">
                                 </form>
                             </div>
-                        </div>
-                    ';
+                        </div>';
                 }
 
             } else {
@@ -66,14 +89,33 @@
                         <p>Nenhuma tarefa ainda</p>
                     </div>';
             }
+        } else {
+            $noTask = '<div class=todo><p>Nenhuma tarefa ainda</p></div>';
+
+            $text1 = '<div class=todo> <div> <input type=checkbox class=clickable> <p class=todo-text>';
+            $text2 = '</p> </div> <div> <a href=index.php?pag=edit&id_task=';
+            $text3 = '> <i class=clickable bi bi-pencil-fill></i></a><form method=POST action=actions.php><input type=hidden name=action value=delete><input type=hidden name=task_id value=';
+            $text4 = '><input type=submit name=submit value=X style=border: none; background: transparent; font-size: 20px; font-weight: 700; width: auto class=clickable></form></div></div>';
+            
+            echo '<script>
+                    var home = document.getElementById("home");
+                    home.innerHTML = "";
+                    var localList = localStorage.getItem("tasks");
+                    var list = JSON.parse(localList);
+                    if(list == null || list.length == 0) {
+                        home.innerHTML = "'.$noTask.'";
+                    } else {
+                        for(var i =0;i<list.length; i++) {
+                            home.innerHTML += "'.$text1.'" + list[i] + "'.$text2.'" + i + "'.$text3.'" + i + "'.$text4.'";
+
+                        }
+                    }
+                    
+                </script>';
         }
     
     ?>
 
-<a href="home.php?remove=$task_id">
-
-</a>
-    
 </main>
 
 <form method="POST" action="actions.php" class="todo-input">

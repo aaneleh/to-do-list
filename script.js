@@ -64,5 +64,3 @@ function toggleConfPass(){
         console.log('error');
     }
 }
-
-/*** HOME ***/

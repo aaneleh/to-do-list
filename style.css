@@ -4,6 +4,7 @@
     --background: #FFF;
     --mit-tone: #cccccc;
     --font: #000;
+    --main: #000;
 
     /* margins */
     --margin-footer: 5vh;
@@ -22,6 +23,9 @@
 }
 
 /* LINKS */
+i {
+    color: var(--font);
+}
 a {
     color: var(--font);
     text-decoration: none;
@@ -36,7 +40,7 @@ a {
 
 }
 .button:hover {
-    background: var(--font);
+    background: var(--main);
     color: var(--background);
     border-radius: 1.25em;
     padding: 1em 1.5em;
@@ -44,12 +48,12 @@ a {
 
 }
 .black.button{
-    background: var(--font);
+    background: var(--main);
     color: var(--background);
 }
 .white.button{
     background: var(--background);
-    color: var(--font);
+    color: var(--main);
 }
 .link {
     text-decoration: underline;
@@ -67,6 +71,7 @@ a {
 body {
     font-family: 'Roboto', sans-serif;
     font-weight: var(--light);
+    color: var(--font);
 }
 html {
     height: 115vh; /* <--------- */
@@ -80,7 +85,7 @@ footer, header{
 
     height: var(--margin-footer);
     padding: 1em;
-    background-color: var(--font);
+    background-color: var(--main);
     color: var(--background);
 }
 footer i, header i{
@@ -146,11 +151,11 @@ footer a, header a{
     height: 13.75vh;
     margin: 0em 1.5em;
     font-size: 1.15rem;
-    border-bottom: 0.01em solid var(--font);
+    border-bottom: 0.01em solid var(--main);
 }
 .todo:first-child {
     margin-top: 1em;
-    border-top: 0.01em solid var(--font);
+    border-top: 0.01em solid var(--main);
 }
 .todo div{
     display: flex;
@@ -171,7 +176,7 @@ footer a, header a{
     justify-content: space-around;
     align-items: center;
     
-    border-top: 0.01em solid var(--font);
+    border-top: 0.01em solid var(--main);
     height: 13.5vh;
 }
 .todo-input input{
@@ -208,10 +213,10 @@ footer a, header a{
     align-items: center;
 
     height: 100%;
-    border-top: 0.01em solid var(--font);
+    border-top: 0.01em solid var(--main);
 }
 .colors {
-    border-bottom: 0.01em solid var(--font);
+    border-bottom: 0.01em solid var(--main);
 }
 .config {
     width: 100%;
@@ -229,12 +234,11 @@ footer a, header a{
 }
 
 
-
 .skeuo{
     position: relative;
     width: 4em;
     height: 2em;
-    background: var(--font);
+    background: var(--main);
     border-radius: 1em;
 }
 .skeuo input{
@@ -269,18 +273,19 @@ footer a, header a{
 }
 
 
-
 @media screen and (min-width: 900px) {
     html {
         background: var(--mit-tone);
-
         position: absolute;
         top: 0;
-
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: auto;
+    }
+    .config {
+        width: 150vh;
+        height: auto;
     }
     body {
         width: 150vh;
@@ -288,7 +293,7 @@ footer a, header a{
         /* margin: auto 1em; */
         background: var(--background);
         border-radius: 0.5em;
-        box-shadow: 0 0 0.75em 0.075em var(--font);
+        box-shadow: 0 0 0.75em 0.075em var(--main);
     }
     footer {
         border-radius: 0 0 0.5em 0.5em;

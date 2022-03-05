@@ -1,5 +1,3 @@
-
-
 <header>
     <h3 class="title">
         <a href="index.php?pag=home">
@@ -30,29 +28,36 @@
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
-            text-align: center;"
-    >
+            text-align: center;" >
         <input type="hidden" name="action" value="edit">
 
 
         <br> <h1> Editando a tarefa 
             <?php
-                $task = $_GET['id_task']; //7
-                $user = $_SESSION['user_id']; //9
-                
-                $query = 'SELECT * FROM tasks WHERE task_id ="'.$task.'"';
-                $res = mysqli_query($link, $query) or die(mysqli_error($link));
-                
-                $row = mysqli_fetch_array($res);
-                
-                if($row['user'] == $user){
-                    echo $task;
+                $task = $_GET['id_task'];
+                if(isset($_SESSION['user_id']) and !empty($_SESSION['user_id'])){
+                    $user = $_SESSION['user_id'];
+                    $query = 'SELECT * FROM tasks WHERE task_id ="'.$task.'"';
+                    $res = mysqli_query($link, $query) or die(mysqli_error($link));
                     
-                //CASO A TASK NÃO PERTENÇA AO USUARIO LOGADO, VOLTA À HOME
+                    $row = mysqli_fetch_array($res);
+                    
+                    //CASO A TASK NÃO PERTENÇA AO USUARIO LOGADO, VOLTA À HOME
+                    if($row['user'] != $user){
+                        header('Location: index.php?pag=home'); 
+                        exit;
+                    } 
                 } else {
-                    echo 'ueepaaa';
-                    /* header('Location: index.php?pag=home'); 
-                    exit; */
+                    if(isset($_GET['user']) and $_GET['user'] == "no" and !empty($_GET['task'])) {
+                        $newtask = $_GET['task'];
+                        $task = $_GET['id_task'];
+                        echo '<script>  
+                            var localList = localStorage.getItem("tasks");
+                            var list = JSON.parse(localList);
+                            list['.$task.'] = "'.$newtask.'";
+                            localStorage.setItem("tasks", JSON.stringify(list));
+                        </script>';
+                    }
                 }
             ?> 
         </h1> <br><br><br>
@@ -62,7 +67,24 @@
         <div class="description">
             <h2> <label for=""> Descrição: </label> </h2>
             <br>
-            <input type="text" name="description" id="description_input" value="<?php echo $row['description']?>">
+            <input type="text" name="description" id="description_input" value="">
+            
+            <?php 
+
+                if (isset($_SESSION['user_id']) and !empty($_SESSION['user_id']) ){
+                    echo '<script>
+                                var input = document.getElementById("description_input");
+                                input.value = "'.$row['description'].'";
+                            </script>';
+                } else {
+                    echo '<script>
+                        var input = document.getElementById("description_input");
+                        var localList = localStorage.getItem("tasks");
+                        var list = JSON.parse(localList);
+                        input.value = list['.$task.'];
+                    </script>';
+                }
+            ?>
         </div>
 
         <?php

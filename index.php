@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 
     <title>To-do-list</title>
 </head>
@@ -50,23 +51,54 @@
                 </div>
 
                 <div class="button-container">
-                    <p class="clickable black button title">Sair</p>
+                    <a class="clickable black button title" href="index.php?pg=entrance">Sair</a>
                 </div>
             </div>
 
             <div class="colors">
                 <h3 class="title config">&nbsp&nbspCores</h3>
 
+                <script>
+                    function changeMode(){
+                    const root = document.querySelector(':root');
+                    const cssEstilos = getComputedStyle(root);
+                    background = String(cssEstilos.getPropertyValue('--background')).trim();
+                    main = String(cssEstilos.getPropertyValue('--main')).trim();
+                    //se no tema claro, muda para escuro
+                    if(background == "#FFF") {
+                        //localStorage.setItem('mode', JSON.stringify("light"));
+                        root.style.setProperty('--background', '#000');
+                        root.style.setProperty('--font', '#FFF');
+
+                        if(main == "#000") {
+                            root.style.setProperty('--main', '#FFF');
+                        }
+                    } else {
+                        root.style.setProperty('--background', '#FFF');
+                        root.style.setProperty('--font', '#000');
+                        if(main == "#FFF") {
+                            root.style.setProperty('--main', '#000');
+                        }
+                    }
+                }
+
+                function changeColor(){
+                    const root = document.querySelector(':root');
+                    const input = document.getElementById('input-color').value;
+                    root.style.setProperty('--main', input);
+                }
+                </script>
+
                 <div class="config">
                     <p>Modo escuro</p>
                     <div class="skeuo">
-                        <input type="checkbox" name="" id="mode">
+                        <input type="checkbox" name="" id="mode" onchange="changeMode()">
                         <div class="skeou-circle"></div>
                     </div>
                 </div>
                 <div class="config">
                     <p>Cor destaque</p>
-                    <input type="color" name="" id="mode">
+                    <input type="color" name="" id="input-color" onchange="changeColor()">
                 </div>
             </div>
             
@@ -103,6 +135,5 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>

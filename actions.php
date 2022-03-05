@@ -39,8 +39,6 @@
                     }
                 }
 
-
-
             //senhas não combinam, volta pro register com um aviso
             } else {
                 $nextPage = "register&status=passwordmatch";
@@ -81,52 +79,54 @@
         //insert
         case 'insert':
             $task = $data['task'];
-
-            //se tem algum texto no input
+            $nextPage = "home";
             if(isset($task) and !empty($task)) {
-                //se tem alguem logado faz x
                 session_start();
+                //se tem um user
                 if ( isset($_SESSION['email']) and !empty($_SESSION['email']) ) {
                     echo 'user top';
 
                     $user = $_SESSION['user_id'];
                     $query = 'INSERT INTO tasks (user, description) VALUES ("'.$user.'","'.$task.'")';
                     $res = mysqli_query($link, $query) or die(mysqli_error($link));
-                    
-//!TO DO!: se não tem ninguem logado salva as coisa no local storage
+                //se não tem user
                 } else {
-                    echo 'bad user';
+                    $nextPage = 'home&task='.$task;
                 }
             }
-            $nextPage = "home";
+            
             break;
         
         //delete
         case 'delete':
-//checa se o id_user da session é igual o id_user da row que tem o task_id
             $task_id = $data['task_id'];
-            $query = 'DELETE FROM tasks WHERE task_id ="'.$task_id.'"';
-            $res = mysqli_query($link, $query) or die(mysqli_error($link));
-            $nextPage = "home";
             
+            session_start();
+            if(isset($_SESSION['email']) and !empty($_SESSION['email'])) {
+                $query = 'DELETE FROM tasks WHERE task_id ="'.$task_id.'"';
+                $res = mysqli_query($link, $query) or die(mysqli_error($link));
+                $nextPage = "home";
+            } else {
+                $nextPage = 'home&delete='.$task_id;
+            }
             break;
 
         //edit
         case 'edit':
             //caso algo de errado, essa pagina fica como 'default' já
-            
             $task_id = $data['task_id'];
             $new_description = $data['description'];
 
             $nextPage = 'edit&id_task='.$task_id.'status=error';
 
-            echo '<br>editando';
-            echo '<br>id : '. $task_id;
-            echo '<br>desc : '.$new_description;
-
-            $query = 'UPDATE tasks SET description = "'.$new_description.'" WHERE task_id = "'.$task_id.'"';
-            $res = mysqli_query($link, $query) or die(mysqli_error($link));
-            $nextPage = 'edit&id_task='.$task_id.'&status=ok';
+            session_start();
+            if(isset($_SESSION['email']) and !empty($_SESSION['email'])) {
+                $query = 'UPDATE tasks SET description = "'.$new_description.'" WHERE task_id = "'.$task_id.'"';
+                $res = mysqli_query($link, $query) or die(mysqli_error($link));
+                $nextPage = 'edit&id_task='.$task_id.'&status=ok';
+            } else {
+                $nextPage = 'edit&id_task='.$task_id.'&user=no&status=ok&task='.$new_description;
+            }
             break;
 
         default:
