@@ -271,34 +271,3 @@ footer a, header a{
     transform: translateY(-50%);
     left: 2em;
 }
-
-
-@media screen and (min-width: 900px) {
-    html {
-        background: var(--mit-tone);
-        position: absolute;
-        top: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: auto;
-    }
-    .config {
-        width: 150vh;
-        height: auto;
-    }
-    body {
-        width: 150vh;
-        height: auto;
-        /* margin: auto 1em; */
-        background: var(--background);
-        border-radius: 0.5em;
-        box-shadow: 0 0 0.75em 0.075em var(--main);
-    }
-    footer {
-        border-radius: 0 0 0.5em 0.5em;
-    }
-    header {
-        border-radius: 0.5em 0.5em 0 0;
-    }
-}
