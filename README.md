@@ -17,7 +17,7 @@
 
 ## Descrição
 
-Site com php em que você cria uma conta e loga nela para salvar suas tarefas em um banco de dados.
+Site com php em que você cria uma conta e loga nela para salvar suas tarefas em um banco de dados.  
 Ou, se preferir, continue sem login e as tarefas serão salvas no navegador com js.
 
 
