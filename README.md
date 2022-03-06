@@ -2,7 +2,7 @@
 
 ![Badge last-commit](https://img.shields.io/github/last-commit/aaneleh/to-do-list)
 ![Badge issues](https://img.shields.io/github/issues/aaneleh/to-do-list)
-
+[![wakatime](https://wakatime.com/badge/user/63a62ebf-02b8-40ab-b01b-99f672dace05/project/e0c4e7b4-e150-43ee-99fb-d0c5e1148c96.svg)](https://wakatime.com/badge/user/63a62ebf-02b8-40ab-b01b-99f672dace05/project/e0c4e7b4-e150-43ee-99fb-d0c5e1148c96)
 [![Badge twitter](https://img.shields.io/twitter/follow/helena_kurzzz)](https://twitter.com/helena_kurzzz)
 
 
