@@ -78,7 +78,7 @@
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="task_id" value='.$task_id.'>
 
-                                    <input type="submit" name="submit" value="X" style="border: none; background: transparent; font-size: 20px; font-weight: 700; width: auto" class="clickable">
+                                    <input type="submit" name="submit" value="X" style="border: none; background: transparent; font-size: 20px; font-weight: 700; color: var(--font) width: auto" class="clickable">
                                 </form>
                             </div>
                         </div>';
@@ -95,7 +95,7 @@
             $text1 = '<div class=todo> <div> <input type=checkbox class=clickable> <p class=todo-text>';
             $text2 = '</p> </div> <div> <a href=index.php?pag=edit&id_task=';
             $text3 = '> <i class=bi-pencil-fill></i></a><form method=POST action=actions.php><input type=hidden name=action value=delete><input type=hidden name=task_id value=';
-            $text4 = '><input type=submit name=submit value=X style=border:none;background:transparent;font-size:20px;font-weight:700; width: auto class=clickable></form></div></div>';
+            $text4 = '><input type=submit name=submit value=X style=border:none;color: var(--font);background:transparent;font-size:20px;font-weight:700; width: auto class=clickable></form></div></div>';
             
             echo '<script>
                     var home = document.getElementById("home");

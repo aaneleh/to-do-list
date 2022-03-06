@@ -23,9 +23,6 @@
 }
 
 /* LINKS */
-i {
-    color: var(--font);
-}
 a {
     color: var(--font);
     text-decoration: none;
@@ -95,6 +92,10 @@ footer i, header i{
 }
 footer a, header a{
     color: var(--background);
+}
+main {
+    color: var(--font);
+    background: var(--background);
 }
 .title {
     font-weight: var(--bold);
@@ -167,6 +168,9 @@ footer a, header a{
     width: 1.5em;
     height: 1.5em;
 }
+.todo input:checked~.todo-text{
+    text-decoration: line-through;
+}
 
 .todo-input {
     position: relative;
@@ -175,7 +179,7 @@ footer a, header a{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    
+    background-color: var(--background);
     border-top: 0.01em solid var(--main);
     height: 13.5vh;
 }

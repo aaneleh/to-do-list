@@ -21,7 +21,7 @@
 </header>
 
 
-<main >
+<main>
     
     <form class="edit" method="POST" action="actions.php" style="height: 90vh;
             display: flex;

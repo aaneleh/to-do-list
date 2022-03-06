@@ -37,7 +37,7 @@
             </h3>
         </header>
 
-        <main class="config-container">
+        <div class="config-container">
             <div class="account">
                 <h3 class="title config">&nbsp&nbspConta</h3>
                 <div class="config">
@@ -60,33 +60,60 @@
 
                 <script>
                     function changeMode(){
-                    const root = document.querySelector(':root');
-                    const cssEstilos = getComputedStyle(root);
-                    background = String(cssEstilos.getPropertyValue('--background')).trim();
-                    main = String(cssEstilos.getPropertyValue('--main')).trim();
-                    //se no tema claro, muda para escuro
-                    if(background == "#FFF") {
-                        //localStorage.setItem('mode', JSON.stringify("light"));
-                        root.style.setProperty('--background', '#000');
-                        root.style.setProperty('--font', '#FFF');
-
-                        if(main == "#000") {
+                        const root = document.querySelector(':root');
+                        const cssEstilos = getComputedStyle(root);
+                        background = String(cssEstilos.getPropertyValue('--background')).trim();
+                        main = String(cssEstilos.getPropertyValue('--main')).trim();
+                        font = String(cssEstilos.getPropertyValue('--font')).trim();
+                        //se no tema claro, muda para escuro
+                        if(background == "#FFF") {
+                            //localStorage.setItem('mode', JSON.stringify("light"));
+                            root.style.setProperty('--background', '#000');
+                            root.style.setProperty('--font', '#FFF');
                             root.style.setProperty('--main', '#FFF');
-                        }
-                    } else {
-                        root.style.setProperty('--background', '#FFF');
-                        root.style.setProperty('--font', '#000');
-                        if(main == "#FFF") {
+
+                            /* if(main == "#000") {
+                            } */
+                        } else {
+                            root.style.setProperty('--background', '#FFF');
+                            root.style.setProperty('--font', '#000');
                             root.style.setProperty('--main', '#000');
+                            /* if(main == "#FFF") {
+                            } */
                         }
                     }
-                }
 
-                function changeColor(){
-                    const root = document.querySelector(':root');
-                    const input = document.getElementById('input-color').value;
-                    root.style.setProperty('--main', input);
-                }
+                    function changeColor(){
+                        const root = document.querySelector(':root');
+                        const input = document.getElementById('input-color').value;
+                        root.style.setProperty('--main', input);
+                    }
+
+                    function saveChanges(){
+                        const root = document.querySelector(':root');
+                        const cssEstilos = getComputedStyle(root);
+                        background = String(cssEstilos.getPropertyValue('--background')).trim();
+                        font = String(cssEstilos.getPropertyValue('--font')).trim();
+                        main = String(cssEstilos.getPropertyValue('--main')).trim();
+                        localStorage.setItem("background", JSON.stringify(background));
+                        localStorage.setItem("font", JSON.stringify(font));
+                        localStorage.setItem("main", JSON.stringify(main));
+                    }
+
+                    window.onload = function() {
+                        const root = document.querySelector(':root');
+                        var background = localStorage.getItem("background");
+                        var font = localStorage.getItem("font");
+                        var main = localStorage.getItem("main");
+                        if(background != null || main != null) {
+                            root.style.setProperty('--background', background);
+                            root.style.setProperty('--font', font);
+
+                        }
+                        if(main != null || main != "") {
+                            root.style.setProperty('--font', main);
+                        }
+                    };
                 </script>
 
                 <div class="config">
@@ -106,13 +133,13 @@
             <div class="button-container save">          
                 <br>
                 <br>
-                <p class="clickable black button title">
+                <p class="clickable black button title" onclick="saveChanges()">
                     Salvar Alterações
                 </p>
                 <br>
             </div>
 
-        </main>
+        </div>
     </section>
 
     <footer>
