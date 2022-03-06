@@ -42,6 +42,7 @@ Ou, se preferir, continue sem login e as tarefas serão salvas no navegador com 
 ## Demonstração
 
 [![Thumbnail do vídeo](https://img.youtube.com/vi/8WgIL62vKjQ/0.jpg)](https://www.youtube.com/watch?v=8WgIL62vKjQ)
+
 [Vídeo no youtube](https://www.youtube.com/watch?v=8WgIL62vKjQ)
 
 
